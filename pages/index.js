@@ -1,5 +1,7 @@
+import HomaePage from "@/components/templates/HomaePage/HomaePage";
+
 export default function Home() {
   return (
-    <h1>ITodo</h1>
+    <HomaePage/>
   )
 }
