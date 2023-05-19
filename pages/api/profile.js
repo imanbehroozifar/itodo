@@ -34,6 +34,9 @@ export default async function handler(req, res) {
         user.save();
         res.status(200)
             .json({ status: "success", data: { name, lastName, email: session.user.email } })
+    } else if (req.method === "GET") {
+        res.status(200)
+            .json({ status: "success", data: { name: user.name, lastName: user.lastName, email: user.email } })
     }
 
 
