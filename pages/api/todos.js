@@ -36,23 +36,22 @@ export default async function handler(req, res) {
 
 
     } else if (req.method === "GET") {
-        console.log(user.todos.filter(i => i.title === "todo 4"))
+        // console.log(user.todos.filter(i => i.title === "todo 4"))
         const sortedData = sortTodos(user.todos)
         res.status(200).json({ status: "success", data: { todos: sortedData } })
 
     } else if (req.method === "PATCH") {
-        const { id, status } = req.body
+        const { id, status } = JSON.parse(req.body)
         if (!id || !status) {
             return res
                 .status(422).json({ status: "failed", message: "Error : invalid data" })
         }
-        
+
         const result = await User.updateOne(
             { "todos._id": id },
-            { $set: { 'todo.$.status': status } }
+            { $set: { 'todos.$.status': status } }
         )
-        console.log(result)
-        res.status(200).json({status:"success"})
+        res.status(200).json({ status: "success" })
 
 
     }
