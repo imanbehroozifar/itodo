@@ -9,10 +9,8 @@ const authOptions = {
         CredentialsProvider({
             async authorize(credentials, req) {
                 const { email, password } = credentials
-                console.log({ email, password })
                 try {
                     await connectDB()
-                    console.log('yesss')
                 } catch (error) {
                     throw new Error("Error : connecting to db")
                 }
@@ -20,7 +18,7 @@ const authOptions = {
                     throw new Error("Error : invalid data ")
                 }
                 const user = await User.findOne({ email: email })
-                console.log('use',user)
+                console.log('use', user)
                 if (!user) {
                     throw new Error("Error :user dosent exist alreay ")
                 }
@@ -28,7 +26,7 @@ const authOptions = {
                 if (!isValid) {
                     throw new Error("Error :user name or password is incorrect ")
                 }
-                return { email }
+                return { email: email }
             }
         })
     ]

@@ -11,14 +11,14 @@ const SignInPage = () => {
     useEffect(() => {
         if ( status === "authenticated")router.replace("/")
     },[status])
-    const loginHandler = async () => {
+    const loginHandler = async (event) => {
+        event.preventDefault()
         const res = await signIn("credentials", {
             email,
             password,
-            redirect: false
+            redirect: false,
         })
         if (!res.error) router.replace("/")
-        //09152491990
     }
     return (
         <div className="signin-form">
